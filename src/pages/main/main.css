@@ -1,0 +1,13 @@
+:root{
+    --fonthover:rgba(122, 208, 236, 0.815);
+    --fontsizeNav: 1.1em;
+}
+.maincustom{
+    
+    position: relative;
+    top:-6vh;
+    height: auto;
+    
+}
+
+

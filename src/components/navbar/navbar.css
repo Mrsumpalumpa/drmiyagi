@@ -1,0 +1,101 @@
+:root{
+    --fonthover:rgba(122, 208, 236, 0.815);
+    --fontsizeNav: 1em;
+    --fontJapo: 'Japo'
+}
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&family=Zen+Kurenaido&display=swap');
+
+.japosign{
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1.5em;
+}
+.customnav{
+   
+    background-repeat: no-repeat;
+    width: 100%;
+    background-size: cover;
+    position: fixed;
+    top:0;
+    left: 0;
+    z-index: 3;
+}
+.customnav:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../../static/img/Spectrum-Gradient.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-shadow: grey 1px 1px 3px;
+    border-radius: 0 0 50% 50%/ 0 0 100% 100%;
+    transform: scale(150%);
+    
+}
+.custombrand{
+    
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+.nav-link i{
+    font-size: 1.5em;
+}
+.nav-link, .navbar-brand{
+    color:whitesmoke;
+    text-shadow: rgb(66, 62, 66) .4px 1px;
+    font-weight: bolder;
+}
+.navbar-brand{
+    font-size: var(--fontsizeNav);
+    letter-spacing: 2px;
+    transition: all ease-out .4s;
+    
+}
+.navbar-brand:hover{
+    color:var(--fonthover);
+    transform: scale(110%);
+}
+.nav-link:hover,.nav-link:active{
+    color:var(--fonthover);   
+    
+}
+
+.navbar-toggler-icon{
+    background-image: url('../../static/img/menu4.svg');
+    z-index: 5;
+    
+}
+.navbar-toggler{
+    box-shadow: var(--fonthover) 1px 1PX 3PX;
+    transition: ALL ease-in .3s;
+}
+.navbar-toggler:hover , .navbar-toggler:active{
+    box-shadow: var(--fonthover) 1px 1PX 4PX;
+}
+.navbar-toggler:active{transform: scale(120%);}
+
+.cartLogo,.cartNumber{
+    font-size: var(--fontsizeNav);
+    padding: .1em .5em;
+    text-align: right;
+     
+}
+.cartNumber{
+    color:whitesmoke;
+    background-color: var(--fonthover);
+    border-radius: 50%;
+   
+}
+.cartContainer{
+    
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-flow: row nowrap;
+    margin-right: 3%;
+}
+
+
