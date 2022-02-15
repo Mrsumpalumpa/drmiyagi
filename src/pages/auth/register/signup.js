@@ -32,7 +32,7 @@ const SignUp = ()=>{
                 sessionStorage.setItem(`Token${res.data.user.email}`,JSON.stringify(res.data.token))
             })
         })
-        wi
+        
         
         
     }
