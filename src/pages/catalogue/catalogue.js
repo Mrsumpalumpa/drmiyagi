@@ -1,7 +1,7 @@
-import React,{useEffect} from "react";
+import React,{useEffect,useState} from "react";
 import './catalogue.css'
 import ProductCard from "../../components/productCard/productCard";
-
+import axios from 'axios'
 
 class Order{
     constructor(id,name,price,quantity=0){
@@ -16,7 +16,25 @@ class Order{
 const products = [{"id":0,"name":"Bonsai Pino","price":120,"imgUrl":"https://www.rgbstock.com/download/micromoth/pWmLtN2.jpg"},{"id":1,"name":"Bonsai Manzano","price":80},{"id":2,"name":"Bonsai Castaño","price":100},{"id":3,"name":"Bonsai Ciprés","price":80},{"id":4,"name":"Bonsai Granado","price":70},{"id":5,"name":"Bonsai Naranjo","price":94},{"id":6,"name":"Bonsai Olmo","price":78},{"id":7,"name":"Bonsai Arce","price":120},{"id":8,"name":"Bonsai Sumpalumpa","price":120}]
 
 const Catalogue = ({setTotal,setCartArray})=>{
-    useEffect(()=>{                
+    const [url, setURL] = useState('http://localhost:8000/api/products');
+  const [responseAPI, setResponseAPI] = useState({ respuesta: 'KO' });
+  
+  useEffect(()=>{
+    const apiRequest = async()=>{
+      const req = await axios({url})
+      setResponseAPI(req.data)
+    }
+    apiRequest() 
+  },[]);
+  
+  const MostrarRespuesta = () => {
+    
+    return Object.keys(responseAPI).map(key => {
+      const id= responseAPI[key].id
+      const name = responseAPI[key].name
+      const email = responseAPI[key].email
+      let creationDate = responseAPI[key].created_at})}
+    /*useEffect(()=>{                
         try{
             if(sessionStorage.getItem('DrMiyagiProdList')==null){
                 sessionStorage.setItem('DrMiyagiProdList',JSON.stringify(products))
@@ -38,7 +56,7 @@ const Catalogue = ({setTotal,setCartArray})=>{
         catch(err){
             console.error(err)
       }
-    },[])
+    },[])*/
 
     return(
         <div className="container customcatalogue ">

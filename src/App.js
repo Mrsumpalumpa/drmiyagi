@@ -12,6 +12,12 @@ import Err404 from './pages/404/404'
 import Navbar from './components/navbar/navbar';
 import Dasboard from './pages/dashboard/dashboard'
 import Checkout from './pages/checkout/checkout';
+import axios from 'axios'
+
+axios.defaults.baseURL='http://localhost:8000/';
+axios.defaults.headers.post['Accept']='application/json';
+axios.defaults.headers.post['Content-Type']='application/json';
+axios.defaults.withCredentials= true;
 
 function App() {
   const [refCounter,setRefcounter]= useState(0)

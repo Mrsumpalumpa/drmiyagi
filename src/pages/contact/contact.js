@@ -6,7 +6,7 @@ const Contact = ()=>{
             <h1  className="col-12 text-center">Contact</h1>
             <div className="col-md-6 mx-auto my-0 ">
                 <form className="p-3">
-                    <div clasName="form-row ">
+                    <div className="form-row ">
                         <div className="form-group col-md-12 my-3">
                         <label className="d-block bg-dark text-white px-1 my-1 rounded" htmlFor="inputEmail">Email</label>
                             <input type="email" className="form-control" id="inputEmail"/>
