@@ -16,47 +16,37 @@ class Order{
 const products = [{"id":0,"name":"Bonsai Pino","price":120,"imgUrl":"https://www.rgbstock.com/download/micromoth/pWmLtN2.jpg"},{"id":1,"name":"Bonsai Manzano","price":80},{"id":2,"name":"Bonsai Castaño","price":100},{"id":3,"name":"Bonsai Ciprés","price":80},{"id":4,"name":"Bonsai Granado","price":70},{"id":5,"name":"Bonsai Naranjo","price":94},{"id":6,"name":"Bonsai Olmo","price":78},{"id":7,"name":"Bonsai Arce","price":120},{"id":8,"name":"Bonsai Sumpalumpa","price":120}]
 
 const Catalogue = ({setTotal,setCartArray})=>{
-    const [url, setURL] = useState('http://localhost:8000/api/products');
-  const [responseAPI, setResponseAPI] = useState({ respuesta: 'KO' });
+    
+    const [productsArr,setProductArr]=useState([])
   
   useEffect(()=>{
-    const apiRequest = async()=>{
-      const req = await axios({url})
-      setResponseAPI(req.data)
+    try{
+        const token = sessionStorage.getItem('Token')
+        const userInfo = JSON.parse(sessionStorage.getItem('Info'))
+        const headers = {'Authorization' : `Bearer ${token}`}
+        const fetchCsrf = async()=>{            
+                 const response = await axios.get(`/api/products`,headers)
+                 setProductArr(response.data)
+                 const prodList =[] 
+                 response.data.forEach(prod=>{
+                     const order = new Order(prod.id,prod.name,prod.price)
+                     prodList.push(order)
+                     
+                 })
+                 localStorage.setItem(`cart${userInfo.id}`, JSON.stringify(prodList))
+                 console.log(prodList)
+        }
+        
+        fetchCsrf()
+        
+     
     }
-    apiRequest() 
+    catch(err){
+        alert(err)
+    }
   },[]);
   
-  const MostrarRespuesta = () => {
-    
-    return Object.keys(responseAPI).map(key => {
-      const id= responseAPI[key].id
-      const name = responseAPI[key].name
-      const email = responseAPI[key].email
-      let creationDate = responseAPI[key].created_at})}
-    /*useEffect(()=>{                
-        try{
-            if(sessionStorage.getItem('DrMiyagiProdList')==null){
-                sessionStorage.setItem('DrMiyagiProdList',JSON.stringify(products))
-            }else{
-                console.log('Product list already created') 
-            }
-            const prodArr = JSON.parse(sessionStorage.getItem('DrMiyagiProdList'))
-            let cartProdArr=[]
-            if(localStorage.getItem('Cart')==null){
-                prodArr.forEach(prod=>{  
-                    let cartProd = new Order(prod.id,prod.name,prod.price)
-                    cartProdArr.push(cartProd)           
-                })
-                localStorage.setItem('Cart',JSON.stringify(cartProdArr))   
-            }else{
-                console.log('Cart already created')
-            }      
-        }
-        catch(err){
-            console.error(err)
-      }
-    },[])*/
+  
 
     return(
         <div className="container customcatalogue ">
@@ -64,11 +54,14 @@ const Catalogue = ({setTotal,setCartArray})=>{
                 <div className="col-12 text-center ">
                     <h1 >Catalogue</h1>
                 </div>
-                {products.map((prod,index)=>{
-                    return(
-                        <ProductCard id={prod.id} name={prod.name} imgUrl={prod.imgUrl} key={index} price={prod.price} setTotal={setTotal} setCartArray={setCartArray}></ProductCard>
-                         )
-                })}
+                {productsArr.length>0
+                    ? productsArr.map((prod,index)=>{
+                        return(
+                            <ProductCard id={prod.id} name={prod.name} imgUrl={prod.imgUrl} key={index} price={prod.price} setTotal={setTotal} setCartArray={setCartArray}></ProductCard>
+                            )
+                    })
+                    : <h1>No products available</h1>
+                }
             </div>            
         </div>        
        )

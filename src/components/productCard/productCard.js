@@ -9,15 +9,19 @@ import dummyImg from '../../static/img/logobons.svg'
   
 }*/
 const ProductCard=({id,name='Bonsai',price=100,imgUrl,setTotal})=> {
+  const userInfo = JSON.parse(sessionStorage.getItem('Info'))
   const buy= (f)=>{
-     setTotal((e)=>e+1)
-     const cartArr= JSON.parse(localStorage.getItem('Cart'))
-     cartArr.forEach(prod=>{
-       if(Number(f.target.id) === prod.id){
-         prod.quantity = prod.quantity + 1
-       }
-     })
-     localStorage.setItem('Cart',JSON.stringify(cartArr))
+    try{
+      setTotal((e)=>e+1)
+      const cartArr= JSON.parse(localStorage.getItem(`cart${JSON.stringify(userInfo.id)}`))
+      cartArr.forEach(prod=>{
+        if(Number(f.target.id) === prod.id){
+          prod.quantity = prod.quantity + 1
+        }
+      })
+      localStorage.setItem(`cart${JSON.stringify(userInfo.id)}`,JSON.stringify(cartArr))
+    }catch(err){console.error(err)} 
+    
   }
   return (
     <div className="col-md-4 col-sm-12  ">

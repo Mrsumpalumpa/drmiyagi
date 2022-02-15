@@ -3,13 +3,15 @@ import { Link } from 'react-router-dom'
 import { Fragment, useEffect, useState } from 'react'
 
 const Dashboard = ()=>{
+    const[selectedItemsArr,setSelectedItems]= useState([])
+    const userInfo = JSON.parse(sessionStorage.getItem('Info'))
     useEffect(()=>{
         getCartItems()
     },[])
-    const[selectedItemsArr,setSelectedItems]= useState([])
+    
     const getCartItems=()=>{
         try{
-            const cartArr = JSON.parse(localStorage.getItem('Cart'))
+            const cartArr = JSON.parse(localStorage.getItem(`cart${JSON.stringify(userInfo.id)}`))
             let selectedItems=[]
             cartArr.forEach(item=>{
                 if(item.quantity>0){
