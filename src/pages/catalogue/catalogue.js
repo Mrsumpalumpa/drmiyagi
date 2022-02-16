@@ -33,7 +33,8 @@ const Catalogue = ({setTotal,setCartArray})=>{
                      prodList.push(order)
                      
                  })
-                 localStorage.setItem(`cart${userInfo.id}`, JSON.stringify(prodList))
+                 localStorage.getItem(`cart${userInfo.id}`)? console.log('cart already created') :localStorage.setItem(`cart${userInfo.id}`, JSON.stringify(prodList))
+                 
                  console.log(prodList)
         }
         

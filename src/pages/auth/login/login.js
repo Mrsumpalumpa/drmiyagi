@@ -24,7 +24,8 @@ const Login = ()=>{
             password: loginInput.password,
 
         }
-            try{axios.get('/sanctum/csrf-cookie').then(response=>{
+            try{
+                axios.get('/sanctum/csrf-cookie').then(response=>{
                 axios.post(`/api/login`, data).then(res=>{
                     alert(`${res.data.user.name} logged in!`)
                     sessionStorage.setItem(`Info`,JSON.stringify(res.data.user))

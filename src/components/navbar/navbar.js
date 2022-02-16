@@ -1,11 +1,35 @@
-import {React, useRef} from "react"
+import {React,  useRef} from "react"
 import logobons from '../../static/img/bonsai.svg'
 import './navbar.css'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
+import axios from "axios"
 
 
 const Navbar = ({refCountNumber})=>{
+    let navigate = useNavigate()    
     const cartNumber = useRef()
+
+    const handleLogOut=()=>{
+        const token = JSON.parse(sessionStorage.getItem('Token'))
+        axios.get('/sanctum/csrf-cookie').then(response=>{
+            axios.post(`/api/logout`,{ headers: {"Authorization" : `Bearer ${token}`}}).then(res=>{
+                //alert(`logged in!`)
+                console.log(res)
+                //navigate('/')   
+            })
+        })        
+                  
+    }
+
+    /*useEffect(()=>{
+        try{
+            let user = JSON.parse(sessionStorage.getItem('Info'))
+            let token = JSON.parse(sessionStorage.getItem('Token'))
+            
+            
+        }catch(err){console.log('not logged')}
+              
+    },[])*/
     return(
             <div className="container-fluid customnav">
                 <nav className="navbar navbar-expand-lg row">
@@ -30,9 +54,15 @@ const Navbar = ({refCountNumber})=>{
                             <li className="nav-item px-md-2 my-sm-2 py-2">
                                 <Link className="nav-link" tabIndex="-1" aria-disabled="true" to ="/help"><i className="fa fa-info-circle mx-2" aria-hidden="true"></i>Help</Link>
                             </li>
-                            <li className="nav-item px-md-2 my-sm-2 py-2">
-                                <Link className="nav-link" tabIndex="-1" aria-disabled="true" to="/auth/login"><i className="fa fa-sign-in mx-2" aria-hidden="true"></i>Log In</Link>
-                            </li>
+                            {sessionStorage.getItem('Info')
+                            ?  <li className="nav-item px-md-2 my-sm-2 py-2">
+                                    <Link className="nav-link" onClick={handleLogOut} tabIndex="-1" aria-disabled="true" to="#"><i className="fa fa-sign-in mx-2" aria-hidden="true"></i>Log Out</Link>
+                               </li>
+                            :  <li className="nav-item px-md-2 my-sm-2 py-2">
+                                    <Link className="nav-link" tabIndex="-1" aria-disabled="true" to="/auth/login"><i className="fa fa-sign-in mx-2" aria-hidden="true"></i>Log In</Link>
+                               </li>
+                            }
+                            
                         </ul>
                     </div>
                 </nav>
