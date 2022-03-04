@@ -44,15 +44,15 @@ const SignUp = ()=>{
             <div className="col-md-6 mx-auto py-3">
                 <form className="p-3" onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label className="d-block bg-dark text-white px-1 my-1 rounded" htmlFor="fullName">Full name</label>
+                        <label className="customlabel d-block bg-dark text-white px-1 my-1 rounded" htmlFor="fullName">Full name</label>
                         <input type="text" name='name' onChange={handleInput} value={registerInput.name} className="form-control"  id="fullName" aria-describedby="emailHelp"/>
                     </div>
                     <div className="form-group">
-                        <label className="d-block bg-dark text-white px-1 my-1 rounded" htmlFor="inputEmail1">Email</label>
+                        <label className="customlabel d-block bg-dark text-white px-1 my-1 rounded" htmlFor="inputEmail1">Email</label>
                         <input type="email" name='email' onChange={handleInput} value={registerInput.email} className="form-control" id="inputEmail1" aria-describedby="emailHelp"/>
                     </div>
                     <div className="form-group">
-                        <label className="d-block bg-dark text-white px-1 my-1 rounded" htmlFor="inputPassword1">Password</label>
+                        <label className="customlabel d-block bg-dark text-white px-1 my-1 rounded" htmlFor="inputPassword1">Password</label>
                         <input type="password" name='password' onChange={handleInput} value={registerInput.password}  className="form-control" id="inputPassword1"/>
                     </div>
                     

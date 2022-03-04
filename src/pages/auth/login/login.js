@@ -15,25 +15,23 @@ const Login = ()=>{
     const handleInput=(e)=>{
         e.persist();
         setLoginInput({...loginInput,[e.target.name]: e.target.value})
-        console.log(loginInput)
+        
     }
     const handleSubmit=(e)=>{
         e.preventDefault()
         const data= {
             email: loginInput.email,
             password: loginInput.password,
-
         }
             try{
                 axios.get('/sanctum/csrf-cookie').then(response=>{
-                axios.post(`/api/login`, data).then(res=>{
-                    alert(`${res.data.user.name} logged in!`)
-                    sessionStorage.setItem(`Info`,JSON.stringify(res.data.user))
-                    sessionStorage.setItem(`Token`,JSON.stringify(res.data.token))
-                    navigate('/')   
+                    axios.post(`/api/login`, data).then(res=>{
+                        alert(`${res.data.user.name} logged in!`)
+                        sessionStorage.setItem(`Info`,JSON.stringify(res.data.user))
+                        sessionStorage.setItem(`Token`,JSON.stringify(res.data.token))
+                        navigate('/')   
                     })
                 })
-             
             }
             catch(err){
                 alert(err)
