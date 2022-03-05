@@ -1,0 +1,10 @@
+.customproddet{
+    position: relative;
+    top:20vh;
+    height: auto;
+    
+}
+.imgdet{
+    min-height: 700px;
+    height: fit-content;
+}

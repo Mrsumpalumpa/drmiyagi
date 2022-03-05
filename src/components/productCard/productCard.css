@@ -1,0 +1,9 @@
+.card-img{
+    max-height: 300px;
+}
+.card-header{
+    min-height: 90px ;
+}
+.prodlink{
+    text-decoration: none;
+}

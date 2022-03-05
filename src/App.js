@@ -13,6 +13,7 @@ import Navbar from './components/navbar/navbar'
 import Dasboard from './pages/dashboard/dashboard'
 import Checkout from './pages/checkout/checkout'
 import axios from 'axios'
+import ProductDet from './pages/productDetail/ProductDet'
 
 axios.defaults.baseURL='http://localhost:8000/'
 axios.defaults.headers.post['Accept']='application/json'
@@ -27,7 +28,9 @@ function App() {
         <Navbar refCountNumber={refCounter} setcounter={setRefCounter}></Navbar>
         <Routes>
           <Route exact path="/" element={<Main />}></Route>
-          <Route exact path="/catalogue" element={<Catalogue setTotal={setRefCounter} />}></Route>
+          <Route exact path="/catalogue" element={<Catalogue setTotal={setRefCounter} />}>          
+          </Route>
+          <Route exact path="/product/:productId" element={<ProductDet/>}></Route>
           <Route exact path="/dashboard" element={<Dasboard  />}></Route>
           <Route exact path="/contact" element={<Contact />}></Route>
           <Route exact path="/help" element={<Help />}></Route>
